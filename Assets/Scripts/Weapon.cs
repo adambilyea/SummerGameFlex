@@ -68,12 +68,13 @@ public class Weapon : MonoBehaviour
 
         if (hit)
         {
-
             Enemy enemy = hit.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
+
+            
         }
     }
 
