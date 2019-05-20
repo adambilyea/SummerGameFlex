@@ -18,6 +18,7 @@ public class CharacterController2D : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
+   
 
     [Header("Events")]
     [Space]
@@ -111,18 +112,30 @@ public class CharacterController2D : MonoBehaviour
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
-            // If the input is moving the player right and the player is facing left...
-            if (move > 0 && !m_FacingRight)
+            //// If the input is moving the player right and the player is facing left...
+            //if (move > 0 && !m_FacingRight)
+            //{
+            //    // ... flip the player.
+            //    Flip();
+            //}
+            //// Otherwise if the input is moving the player left and the player is facing right...
+            //else if (move < 0 && m_FacingRight)
+            //{
+            //    // ... flip the player.
+            //    Flip();
+            //}
+
+            Vector3 characterScale = transform.localScale;
+            if (Input.GetAxis("Horizontal") < 0)
             {
-                // ... flip the player.
-                Flip();
+                characterScale.x = -3.350466f;
             }
-            // Otherwise if the input is moving the player left and the player is facing right...
-            else if (move < 0 && m_FacingRight)
+
+            if (Input.GetAxis("Horizontal") > 0)
             {
-                // ... flip the player.
-                Flip();
+                characterScale.x = 3.350466f;
             }
+            transform.localScale = characterScale;
         }
         // If the player should jump...
         if (m_Grounded && jump)
@@ -139,6 +152,6 @@ public class CharacterController2D : MonoBehaviour
         // Switch the way the player is labelled as facing.
         m_FacingRight = !m_FacingRight;
        
-        transform.Rotate(0f, 180f, 0f);
+        //transform.Rotate(0f, 180f, 0f);
     }
 }
