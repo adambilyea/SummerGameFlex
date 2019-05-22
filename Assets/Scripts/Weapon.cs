@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     public float Damage = 10;
     public int damage = 40;
     public LayerMask whatToHit;
+    public GameObject impactEffect;
 
 
     public Transform BulletTrailPrefab;
@@ -69,12 +70,16 @@ public class Weapon : MonoBehaviour
         if (hit)
         {
             Enemy enemy = hit.transform.GetComponent<Enemy>();
+
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
 
+            Instantiate(impactEffect, hit.point, Quaternion.identity);
             
+
+
         }
     }
 
