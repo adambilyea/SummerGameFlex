@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController2D controller;
     public Animator animator;
 
     public float speed = 40f;
-
     float horizontalMove = 0f;
     bool jump = false;
     bool crouch = false;
@@ -34,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         {
             crouch = false;
         }
+    
     }
 
     public void onLanding()
