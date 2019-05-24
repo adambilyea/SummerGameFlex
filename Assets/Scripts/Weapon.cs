@@ -4,87 +4,52 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public float fireRate = 0;
-    public float Damage = 10;
-    public int damage = 40;
     public LayerMask whatToHit;
+    public Transform firePoint;
+    public int damage = 40;
     public GameObject impactEffect;
-
-
-    public Transform BulletTrailPrefab;
-
-    float timeToSpawnEffect = 0;
-    float timeToFire = 0;
-    public float effectSpawnRate = 10;
-    Transform firePoint;
-
-    void Awake()
-    {
-        firePoint = transform.Find("FirePoint");
-        if (firePoint == null)
-        {
-            Debug.LogError("No Fire Point");
-        }
-    }
+    public LineRenderer lineRenderer;
 
     // Update is called once per frame
     void Update()
     {
-        if (fireRate == 0) {
-            if (Input.GetButtonDown("Fire1")) {
-                Shoot();
-
-            }
-        }
-        else {
-            if (Input.GetButton ("Fire1") && Time.time > timeToFire) {
-                timeToFire = Time.time + 1/fireRate;
-                Shoot();
-            }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            StartCoroutine(Shoot());
         }
     }
 
-    void Shoot ()
+    IEnumerator Shoot()
     {
-        Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint (Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        Vector2 mousePosition = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100, whatToHit);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100, whatToHit);
 
-        if (Time.time >= timeToSpawnEffect)
+        if (hitInfo)
         {
-            Effect();
-            timeToSpawnEffect = Time.time + 1/effectSpawnRate;
-        }
-       
+            Debug.Log(hitInfo.transform.name);
 
-        Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.cyan);
-
-        if (hit.collider != null)
-        {
-            Debug.DrawLine(firePointPosition, hit.point, Color.red);
-            Debug.Log("Hit " + hit.collider.name + " for " + Damage + " damage.");
-        }
-
-
-
-        if (hit)
-        {
-            Enemy enemy = hit.transform.GetComponent<Enemy>();
-
+            Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
             }
 
-            Instantiate(impactEffect, hit.point, Quaternion.identity);
-            
+            Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
 
-
+            lineRenderer.SetPosition(0, firePointPosition);
+            lineRenderer.SetPosition(1, hitInfo.point);
         }
-    }
+        else
+        {
+            lineRenderer.SetPosition(0, firePointPosition);
+            lineRenderer.SetPosition(1, mousePosition - firePointPosition);
+        }
 
-    void Effect()
-    {
-        Instantiate(BulletTrailPrefab, firePoint.position, firePoint.rotation);
+        lineRenderer.enabled = true;
+
+        yield return 0;
+
+        lineRenderer.enabled = false;
     }
 }
