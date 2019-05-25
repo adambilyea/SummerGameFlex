@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public int damage = 40;
     public GameObject impactEffect;
     public LineRenderer lineRenderer;
+  
 
     // Update is called once per frame
     void Update()

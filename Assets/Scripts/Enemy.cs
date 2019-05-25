@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public int health = 100;
 
     public GameObject deathEffect;
+    GameObject clone;
 
     // Update is called once per frame
     public void TakeDamage(int damage)
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
+            clone = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             Die();
         }
     }
@@ -22,5 +24,6 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        Destroy(clone, 1.0f);
     }
 }
