@@ -26,6 +26,8 @@ public class Weapon : MonoBehaviour
         Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
         RaycastHit2D hitInfo = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100, whatToHit);
 
+        lineRenderer.enabled = true;
+
         if (hitInfo)
         {
             Debug.Log(hitInfo.transform.name);
@@ -47,7 +49,7 @@ public class Weapon : MonoBehaviour
             lineRenderer.SetPosition(1, mousePosition - firePointPosition);
         }
 
-        lineRenderer.enabled = true;
+       
 
         yield return 0;
 
