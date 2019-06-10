@@ -9,12 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: e23cbfb5cdac2f14294a53e66bb8aaab
   - enabled: 1
-    path: Assets/Scenes/1st Scene.unity
-    guid: f315e4f8f079e094c8e093815af4505d
+    path: Assets/Scenes/Forest.unity
+    guid: 9ec215dcf967f5040adf8ef31c062b90
   - enabled: 1
-    path: Assets/Scenes/Maze.unity
-    guid: b9a1ec014102449449381d82e863c7ee
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+    path: Assets/Scenes/Claustophobia.unity
+    guid: f315e4f8f079e094c8e093815af4505d
   m_configObjects: {}

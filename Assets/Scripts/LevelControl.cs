@@ -5,15 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class LevelControl : MonoBehaviour
 {
-    public int index;
+ 
+    public Animator transitionsAnim;
+    public string sceneName;
 
     // Start is called before the first frame update
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(index);
+            StartCoroutine(LoadScene());
         }    
                 
+    }
+
+    IEnumerator LoadScene()
+    {
+        transitionsAnim.SetTrigger("end");
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(sceneName);
+
+
     }
 }
