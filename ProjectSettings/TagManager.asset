@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - FirePoint
   - Enemy
+  - Bouncy
+  - DeathObject
   layers:
   - Default
   - TransparentFX

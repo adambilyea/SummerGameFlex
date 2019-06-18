@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Claustophobia.unity
     guid: f315e4f8f079e094c8e093815af4505d
+  - enabled: 1
+    path: Assets/Scenes/Heights.unity
+    guid: e291a599eab2a034abfbf6f8fa0b566c
   m_configObjects: {}

@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsLadder;
     private bool isClimbing;
     public float ladderSpeed = 1f;
-
+    public float thrust;
     public float speed = 40f;
     float horizontalMove = 0f;
     bool jump = false;
@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
+
 
     //get input from player
     void Update()
@@ -47,6 +49,16 @@ public class PlayerMovement : MonoBehaviour
             crouch = false;
         }
     
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Bouncy")
+        {
+            Debug.Log("Testing");
+            rb.AddForce(transform.up * 560);
+            // this rigidbody hit the player
+        }
     }
 
     public void onLanding()
