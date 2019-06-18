@@ -46,7 +46,7 @@ public class Weapon : MonoBehaviour
         else
         {
             lineRenderer.SetPosition(0, firePointPosition);
-            lineRenderer.SetPosition(1, mousePosition - firePointPosition);
+            lineRenderer.SetPosition(1, hitInfo.point);
         }
 
        
