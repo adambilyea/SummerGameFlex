@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArmRotation : MonoBehaviour
 {
 
-    int rotationOffset = 0;
+    public int rotationOffset = 0;
     
 
     // Update is called once per frame
@@ -16,12 +16,12 @@ public class ArmRotation : MonoBehaviour
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, rotZ + rotationOffset);
 
-        if (Input.GetAxis("Horizontal") < 0)
+        if (Input.GetKeyDown(KeyCode.A))
         {
             rotationOffset = 180;
         }
 
-        if (Input.GetAxis("Horizontal") > 0)
+        if (Input.GetKeyDown(KeyCode.D))
         {
             rotationOffset = 0;
         }
