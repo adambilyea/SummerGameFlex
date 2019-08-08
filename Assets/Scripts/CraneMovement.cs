@@ -5,12 +5,12 @@ using UnityEngine;
 public class CraneMovement : MonoBehaviour
 {
     private PressE myScript;
-    private Rigidbody2D rb;
+    private Rigidbody2D CraneRigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        CraneRigidbody = GameObject.Find("TopOfCrane").GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -18,8 +18,9 @@ public class CraneMovement : MonoBehaviour
     {
         if (PressE.activated == true)
         {
-            Debug.Log("Crane Is Moving");
-            rb.AddForce(transform.up * 1560);
+            transform.rotation = Quaternion.EulerAngles(0f, 0f, transform.rotation.z + 0.11f/*0.228f*/);
+            transform.position = new Vector3(176.84f, 60.41f, 0f);
+
         }
     }
 }

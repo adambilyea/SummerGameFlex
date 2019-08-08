@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
+    public GameObject dustEffect;
+    GameObject clone;
+
 
     void Start()
     {
@@ -64,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
     public void onLanding()
     {
         animator.SetBool("isJumping", false);
+        //clone = (GameObject)Instantiate(dustEffect, new Vector3 (transform.position.x, transform.position.y - 1.2f, -10f), Quaternion.identity);
 
     }
 
@@ -72,6 +76,14 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isCrouching", isCrouching);
 
     }
+
+    public void onClimbing(bool isClimbing)
+    {
+        animator.SetBool("isClimbing", isClimbing);
+
+    }
+
+
 
     void FixedUpdate()
     {
@@ -87,11 +99,13 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W))
             {
                 isClimbing = true;
+                animator.SetBool("isClimbing", true);
             }
         }
         else
         {
             isClimbing = false;
+            animator.SetBool("isClimbing", false);
         }
 
         if (isClimbing == true)
@@ -103,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.gravityScale = 3;
+            animator.SetBool("isClimbing", false);
         }
             
     }

@@ -12,6 +12,8 @@ TagManager:
   - Bouncy
   - DeathObject
   - Activation
+  - BreakableFloor
+  - MaxHeight
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - Background
   - Background 2
   - Ladder
-  - 
+  - TriggerLayer
   - LightSources
   - LightObstacles
   - AmbientLight

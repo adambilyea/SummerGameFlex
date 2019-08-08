@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelControl : MonoBehaviour
 {
- 
-    public Animator transitionsAnim;
+
     public string sceneName;
 
     // Start is called before the first frame update
@@ -21,8 +20,7 @@ public class LevelControl : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        transitionsAnim.SetTrigger("end");
-        yield return new WaitForSeconds(1.5f);
+
         SceneManager.LoadScene(sceneName);
 
 
